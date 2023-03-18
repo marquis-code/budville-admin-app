@@ -1,26 +1,61 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <admin-layout>
+    <template v-slot:adminHeader="{ userItem }">
+      <admin-header :userContent="userItem"></admin-header>
+    </template>
+    <template v-slot:adminSidebar="{ sidebarItems }">
+      <admin-sidebar
+        brandName="Budville"
+        :sidebarContents="sidebarItems"
+      ></admin-sidebar>
+    </template>
+    <template v-slot:pageContents>
+      <div class="w-full">
+        <router-view />
+      </div>
+    </template>
+  </admin-layout>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import AdminLayout from "./components/AdminLayout.vue";
+import AdminHeader from "./components/AdminHeader.vue";
+import AdminSidebar from "./components/AdminSidebar.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    AdminLayout,
+    AdminHeader,
+    AdminSidebar,
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.moveInUp-enter-active {
+  animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.moveInUp-leave-active {
+  animation: moveInUp 0.3s ease-in;
+}
+@keyframes moveInUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-400px);
+  }
 }
 </style>
