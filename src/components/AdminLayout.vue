@@ -1,16 +1,6 @@
 <template>
   <main class="flex select-none space-x-6 h-screen relative">
     <div
-      v-if="isSidebarFolded"
-      class="z-50 absolute top-6 left-6 cursor-pointer"
-    >
-      <img
-        @click="toggleHamburger"
-        src="@/assets/images/hamburgerMenue.svg"
-        alt=""
-      />
-    </div>
-    <div
       class="h-full sticky top-0 bg-gray-50 w-2/12 border-2"
       :class="isSidebarFolded ? 'hidden' : ''"
     >
@@ -20,7 +10,16 @@
       class="mx-auto px-6 space-y-8 h-screen overflow-scroll w-10/12"
       :class="isSidebarFolded ? 'w-full pl-0' : ''"
     >
-      <div class="h-16 z-50 sticky top-6">
+      <div
+        class="z-50 cursor-pointer sticky top-0 flex justify-between flex-row-reverse items-center py-4 px-4 bg-gray-50 rounded-lg"
+      >
+        <img
+          v-if="isSidebarFolded"
+          @click="toggleHamburger"
+          src="@/assets/images/hamburgerMenue.svg"
+          alt=""
+        />
+
         <slot name="adminHeader" :userItem="loggedUser"></slot>
       </div>
 
@@ -31,17 +30,36 @@
 
     <div v-if="showHamburger">
       <div
-        class="space-y-6 w-10/12 mx-auto z-50 absolute right-0 h-screen pt-10 px-6 bg-black rounded-tl-lg rounded-bl-lg"
+        class="space-y-6 w-full mx-auto z-50 absolute right-0 h-screen pt-6 px-6 bg-gray-200 rounded-tl-lg rounded-bl-lg"
       >
+        <div class="flex justify-between flex-row-reverse items-center">
+          <div>
+            <img
+              @click="showHamburger = !showHamburger"
+              class="text-white"
+              src="@/assets/images/close.svg"
+              alt=""
+            />
+          </div>
+          <div class="rounded-full">
+            <img
+              class="text-white h-10 w-10"
+              src="@/assets/images/icon.png"
+              alt=""
+            />
+          </div>
+        </div>
         <div
           class="space-y-6 w-full"
           v-for="sidebarContent in sidebarContents"
           :key="sidebarContent.label"
         >
           <div
-            class="bg-gray-200 space-x-2 flex items-center cursor-pointer border-x-4 border-x-green-500 p-3 pl-6 rounded-lg w-full shadow-sm transition hover:shadow-lg"
+            @click="showHamburger = !showHamburger"
+            class="bg-black space-x-2 flex items-center cursor-pointer border-x-4 border-x-green-500 p-3 pl-6 rounded-lg w-full shadow-sm transition hover:shadow-lg"
           >
             <img
+              class="bg-gray-100 rounded-full"
               :alt="sidebarContent.label"
               :src="require(`@/assets/images/${sidebarContent.icon}.svg`)"
             />
@@ -151,7 +169,6 @@ export default {
 
   methods: {
     toggleHamburger() {
-      console.log("yo chsa");
       this.showHamburger = !this.showHamburger;
     },
     resizeHandler() {

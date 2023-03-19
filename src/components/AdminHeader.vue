@@ -1,6 +1,6 @@
 <template>
   <main
-    class="flex mt-6 justify-end items-center space-x-4 "
+    class="flex justify-end items-center space-x-4 "
   >
     <span class="bg-green-200 rounded-full p-3 shadow-sm cursor-pointer relative">
       <img class="h-4 w-4" src="@/assets/images/notificationIcon.svg" alt="" />

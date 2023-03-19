@@ -1,7 +1,8 @@
 <template>
   <main class="flex justify-center items-center space-y-10 flex-col px-6">
     <h1 class="text-3xl text-orange-400 font-mono font-bold pt-6">
-      {{ brandName }}
+      <img class="h-10 w-10" :src="require(`@/assets/images/${brandName}.png`)" alt="" />
+      <!-- {{ brandName }} -->
     </h1>
     <div class="space-y-6 w-full">
       <div
